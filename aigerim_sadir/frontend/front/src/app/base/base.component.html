@@ -1,0 +1,33 @@
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+  <a routerLink="/" class="navbar-brand">TODO-FRONT</a> 
+  <div class="collapse navbar-collapse" id="navbarSupportedContent">
+    <ul class="navbar-nav mr-auto">
+      <li class="nav-item" *ngIf="auth.isAuthenticated()">
+        <a routerLink="/task_lists" class="nav-link">Task Lists</a> 
+      </li>
+    </ul>
+    <ul class="navbar-nav mr-auto pull-right">
+      <li class="nav-item" *ngIf="!auth.isAuthenticated()">
+        <a routerLink="/login" class="nav-link">Log In</a> 
+      </li>
+      <li class="nav-item" *ngIf="auth.isAuthenticated()">
+        <a class="nav-link" (click)="logout()">Log Out</a> 
+      </li>
+      <li class="nav-item" *ngIf="!auth.isAuthenticated()">
+        <a routerLink="/register" class="nav-link">Register</a> 
+      </li>
+    </ul>
+  </div>
+
+</nav>
+
+<br>
+<div class="container">
+  <div class="row justify-content-center">
+          <div class="container col-md-6">
+          <ng-content *ngIf="auth.isAuthenticated()" select="[body]"></ng-content>
+          <ng-content *ngIf="!auth.isAuthenticated()" select="[authforms]"></ng-content>
+          </div>
+      
+  </div>
+</div>
